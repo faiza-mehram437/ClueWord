@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clue Word</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+  <!-- "?v=2" is a version number: change it when you update a file,
+       so browsers download the new one instead of an old saved copy -->
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+  <!-- Twinkling stars in the background (just decoration) -->
+  <div class="sky" id="sky" aria-hidden="true"></div>
+
+  <header>
+    <button class="icon-btn" id="help-btn" aria-label="How to play">❓</button>
+    <h1>Clue<span>Word</span></h1>
+    <button class="icon-btn" id="stats-btn" aria-label="Statistics">📊</button>
+  </header>
+
+  <!-- Daily: the same word for everyone today. Practice: a random word, play as often as you like -->
+  <div class="modes" role="tablist">
+    <button class="mode selected" id="daily-btn" role="tab" aria-selected="true">📅 Daily</button>
+    <button class="mode" id="practice-btn" role="tab" aria-selected="false">🔁 Practice</button>
+  </div>
+
+  <main>
+    <!-- The clue card: category, riddle and a locked emoji hint -->
+    <section class="clue-card" aria-live="polite">
+      <div class="clue-top">
+        <span class="category" id="category">Animal</span>
+        <span class="coins" title="Coins: spend them on letter hints">💰 <strong id="coins">3</strong></span>
+      </div>
+      <p class="clue" id="clue">Loading clue...</p>
+      <div class="clue-bottom">
+        <div class="emoji-hint" id="emoji-hint">
+          <span class="emoji" id="emoji">🔒</span>
+          <span class="emoji-label" id="emoji-label">Emoji hint unlocks after 3 guesses</span>
+        </div>
+        <button class="power" id="reveal-btn" title="Spend 1 coin to reveal a letter">💡 Reveal a letter <small>1 💰</small></button>
+      </div>
+    </section>
+
+    <!-- Letters you already know the position of -->
+    <div class="known" aria-label="Known letters">
+      <span class="known-label">Known</span>
+      <div class="known-tiles" id="known"></div>
+    </div>
+
+    <div class="board-wrap">
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      <div id="board" class="board" aria-label="Guesses"></div>
+    </div>
+    <button id="new-word-btn" class="primary" hidden>Next word ➜</button>
+  </main>
+
+  <div id="keyboard" class="keyboard" aria-label="Keyboard"></div>
+
+  <!-- How to play -->
+  <dialog id="help-dialog">
+    <h2>How to play</h2>
+    <p>Guess the hidden <strong>5-letter word</strong> in <strong>6 tries</strong>.
+       Read the <strong>clue</strong> at the top: it's a riddle about the word!</p>
+    <div class="example"><span class="tile correct">S</span> <span>Right letter, right spot</span></div>
+    <div class="example"><span class="tile present">T</span> <span>In the word, wrong spot</span></div>
+    <div class="example"><span class="tile absent">O</span> <span>Not in the word</span></div>
+    <h3>Extra help</h3>
+    <ul>
+      <li>🔓 After <strong>3 guesses</strong>, an <strong>emoji hint</strong> unlocks.</li>
+      <li>💡 Spend a <strong>💰 coin</strong> to <strong>reveal a letter</strong> (2 per word).</li>
+      <li>💰 Win to earn coins: <strong>+1</strong> per win, <strong>+1 bonus</strong> without any letter hints.</li>
+      <li>⭐ Fewer guesses and fewer hints = more <strong>points</strong>.</li>
+    </ul>
+    <button class="primary close-btn">Let's play!</button>
+  </dialog>
+
+  <!-- Statistics -->
+  <dialog id="stats-dialog">
+    <h2>Your stats</h2>
+    <div class="stats-row">
+      <div><strong id="stat-played">0</strong><span>Played</span></div>
+      <div><strong id="stat-win">0</strong><span>Win %</span></div>
+      <div><strong id="stat-streak">0</strong><span>Streak 🔥</span></div>
+      <div><strong id="stat-points">0</strong><span>Points ⭐</span></div>
+    </div>
+    <h3>Guess distribution</h3>
+    <div id="distribution" class="distribution"></div>
+    <p class="next-word">Next daily word in <strong id="countdown">--:--:--</strong></p>
+    <div class="dialog-actions">
+      <button class="primary" id="share-btn">Share 📋</button>
+      <button class="secondary close-btn">Close</button>
+    </div>
+  </dialog>
+
+  <script src="words.js?v=2"></script>
+  <script src="game.js?v=2"></script>
+</body>
+</html>
