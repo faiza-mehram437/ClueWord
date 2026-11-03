@@ -64,16 +64,6 @@ the browser's `localStorage`.
 
 HTML · CSS (Grid, animations, glassmorphism) · JavaScript · localStorage · Clipboard API
 
-## 🚀 Run it locally
-
-```bash
-git clone https://github.com/faiza-mehram437/ClueWord.git
-cd ClueWord
-python -m http.server 8000
-```
-
-Then open **http://localhost:8000**. You can also just double-click `index.html`.
-
 ## 📁 Project structure
 
 ```
